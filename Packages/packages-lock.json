@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "e6240879c455fb69ea8d05ad6612f41bf86496ca"
     },
+    "com.dbrizov.naughtyattributes": {
+      "version": "https://github.com/dbrizov/NaughtyAttributes.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "8a8fa5a9659a6d63f196391c71e06c4286c8acd7"
+    },
     "com.unity.collab-proxy": {
       "version": "1.11.2",
       "depth": 0,
