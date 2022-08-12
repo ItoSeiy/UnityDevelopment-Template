@@ -15,7 +15,7 @@
 
 ## 導入済みアセット
 
-### DOTween Pro
+### DOTween
 > https://assetstore.unity.com/packages/tools/visual-scripting/dotween-pro-32416
 
 ### UniRx
