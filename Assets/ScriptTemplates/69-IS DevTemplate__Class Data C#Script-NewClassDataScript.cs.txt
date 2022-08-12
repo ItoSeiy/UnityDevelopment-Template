@@ -1,0 +1,7 @@
+namespace NickGames.Data
+{
+	[System.Serializable]
+	public class #SCRIPTNAME#
+	{
+	}
+}

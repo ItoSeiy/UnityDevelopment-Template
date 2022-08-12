@@ -1,0 +1,52 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using NickGames.UI;
+
+    #ROOTNAMESPACEBEGIN#
+public class #SCRIPTNAME# : UIMonoBehaviourWithSingleton<#SCRIPTNAME#>
+{
+    #region Properties
+    #endregion
+
+    #region Inspector Variables
+    #endregion
+
+    #region Member Variables
+    #endregion
+
+    #region Constant
+    #endregion
+
+    #region Events
+    #endregion
+    
+    #region Unity Methods
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    private void Start()
+    {
+        #NOTRIM#
+    }
+
+    private void Update()
+    {
+        #NOTRIM#
+    }
+
+    #endregion
+
+    #region Enums
+    #endregion
+
+    #region Public Methods
+    #endregion
+
+    #region Private Methods
+    #endregion
+}
+#ROOTNAMESPACEEND#
