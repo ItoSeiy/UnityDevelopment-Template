@@ -1,7 +1,6 @@
-namespace NickGames.Data
+    #ROOTNAMESPACEBEGIN#
+[System.Serializable]
+public class #SCRIPTNAME#
 {
-	[System.Serializable]
-	public class #SCRIPTNAME#
-	{
-	}
 }
+#ROOTNAMESPACEEND#

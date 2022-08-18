@@ -1,22 +1,21 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace NickGamesEditor
+    #ROOTNAMESPACEBEGIN#
+// [CustomEditor(typeof([エディター拡張したいクラス]))]
+internal class #SCRIPTNAME# : Editor
 {
-    // [CustomEditor(typeof([エディター拡張したいクラス]))]
-    internal class #SCRIPTNAME# : Editor
+    public override void OnInspectorGUI()
     {
-        public override void OnInspectorGUI()
+        base.OnInspectorGUI();
+
+        // anyClass変数には拡張したいクラスの名前をキャメルケースにした名前にする
+        // var anyClass = target as [エディター拡張したいクラス];
+
+        if (GUILayout.Button("実行"))
         {
-            base.OnInspectorGUI();
-
-            // anyClass変数には拡張したいクラスの名前をキャメルケースにした名前にする
-            // var anyClass = target as [エディター拡張したいクラス];
-
-            if (GUILayout.Button("実行"))
-            {
-                // anyClass.実行したい関数();
-            }
+            // anyClass.実行したい関数();
         }
     }
 }
+#ROOTNAMESPACEEND#
