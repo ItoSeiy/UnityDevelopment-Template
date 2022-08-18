@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
-namespace NickGamesDebug
+namespace ISDevTemplateDebug
 {
     /// <summary>
     /// デバッグを行うクラス

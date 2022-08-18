@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-using NickGamesDebug;
+using ISDevTemplateDebug;
 
 namespace ISDevTemplateEditor
 {
