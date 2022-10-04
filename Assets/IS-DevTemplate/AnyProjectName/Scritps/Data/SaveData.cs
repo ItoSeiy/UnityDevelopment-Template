@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ISDevTemplate.Data
 {
     [System.Serializable]
