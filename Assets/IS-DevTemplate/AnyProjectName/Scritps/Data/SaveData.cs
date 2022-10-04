@@ -5,7 +5,8 @@ namespace ISDevTemplate.Data
     {
         public string SceneName;
         
-        /// <summary>このシーンが何番目であるか</summary>
+        /// <summary>このシーンがインゲームの中で何番目であるか</summary>
+        [Header("このシーンがインゲームの中で何番目であるか")]
         public int SceneIndex;
 
         public SaveData(string sceneName, int sceneIndex)
