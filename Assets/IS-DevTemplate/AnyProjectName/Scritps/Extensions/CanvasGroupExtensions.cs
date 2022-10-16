@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace ISDevTemplate
+namespace ISDevTemplate.Extensions
 {
     public static class CanvasGroupExtensions
     {
