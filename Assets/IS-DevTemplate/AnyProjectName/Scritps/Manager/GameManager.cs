@@ -65,9 +65,6 @@ namespace ISDevTemplate.Manager
 
         #endregion
 
-        #region Enums
-        #endregion
-
         #region Public Methods
 
         /// <summary>
@@ -105,7 +102,6 @@ namespace ISDevTemplate.Manager
             }
 
             _isGameJudgePrinted = true;
-
             OnGameOver?.Invoke();
 
             _gameOverCanvas.Enable(_fadeDuration);
