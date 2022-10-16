@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/IS-DevTemplate/AnyProjectName/Scnens/Main/DataLoading.unity
+    guid: 4f128eb9b0ffd9744a0e9b748374a3fa
+  - enabled: 1
+    path: Assets/IS-DevTemplate/AnyProjectName/Scnens/Main/Stage01.unity
+    guid: 783e524312877ad46930e3d9d97edbf2
+  - enabled: 1
+    path: Assets/IS-DevTemplate/AnyProjectName/Scnens/Main/Stage02.unity
+    guid: f78dc0b366c35bb43afab6ba9a019c28
+  - enabled: 1
+    path: Assets/IS-DevTemplate/AnyProjectName/Scnens/Main/Stage03.unity
+    guid: d8e7dd41fb59b304ab427e7117d5f058
   m_configObjects: {}

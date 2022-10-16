@@ -1,6 +1,5 @@
 using System;
 using Cysharp.Threading.Tasks;
-using ISDevTemplate.Manager;
 using UnityEngine;
 using static ISDevTemplate.Utility.FileUtils;
 using static ISDevTemplate.Utility.JsonUtils;
@@ -23,15 +22,9 @@ namespace ISDevTemplate.Data
 
         private int _sceneIndex;
 
-        public event Action<SaveData> OnSaveDataLoded;
+        public event Action OnSaveDataLoded;
 
         public event Action OnSaveDataLoadFailed;
-
-        private void Start()
-        {
-            _ = LoadSaveData();
-            GameManager.Instance.OnGameClear += OnGameClear;
-        }
 
         public async UniTask SaveAsync(SaveData saveData)
         {
@@ -45,7 +38,7 @@ namespace ISDevTemplate.Data
             await CreateJsonAsync(_saveData, $"{GetWritableDirectoryPath()}/{SAVE_DATA_JSON_FILE_NAME}");
         }
 
-        private async void OnGameClear()
+        public async UniTask IncrementSaveData()
         {
             try
             {
@@ -61,7 +54,7 @@ namespace ISDevTemplate.Data
             await SaveAsync(_saveData);
         }
 
-        private async UniTask LoadSaveData()
+        public async UniTask LoadSaveData()
         {
             await UniTask.WaitForFixedUpdate();
 
@@ -90,7 +83,7 @@ namespace ISDevTemplate.Data
             }
 
             _sceneIndex = _saveData.SceneIndex;
-            OnSaveDataLoded?.Invoke(_saveData);
+            OnSaveDataLoded?.Invoke();
         }
 
         private void CheckSaveData()

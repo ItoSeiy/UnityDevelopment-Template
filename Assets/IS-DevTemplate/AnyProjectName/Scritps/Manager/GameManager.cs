@@ -1,20 +1,14 @@
 using System;
 using ISDevTemplate.Data;
 using ISDevTemplate.Scene;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using UniRx;
 
 namespace ISDevTemplate.Manager
 {
     public class GameManager : SingletonMonoBehaviour<GameManager>
     {
-        #region Properties
-
-        public bool IsGameFinish { get; private set; } = false;
-
-        #endregion
-
         #region Inspector Variables
 
         [SerializeField]
@@ -35,16 +29,24 @@ namespace ISDevTemplate.Manager
         #endregion
 
         #region Member Variables
-        #endregion
 
-        #region Constant
+        private bool _isGameJudgePrinted = false;
+
         #endregion
 
         #region Events
 
+        /// <summary>ゲームクリア時のイベント</summary>
         public event Action OnGameClear;
 
+        /// <summary>ゲームクリア時に出る、「次に進むボタン」を押した時のイベント</summary>
+        public event Action OnGameClearButton;
+
+        /// <summary>ゲームオーバー時のイベント</summary>
         public event Action OnGameOver;
+
+        /// <summary>ゲームオーバー時に出る、「リトライのボタン」を押した時のイベント</summary>
+        public event Action OnGameOverButton;
 
         #endregion
 
@@ -54,6 +56,11 @@ namespace ISDevTemplate.Manager
         {
             base.Awake();
             SetEvents();
+        }
+
+        private void Start()
+        {
+           _ = SaveDataManager.Instance.LoadSaveData();
         }
 
         #endregion
@@ -69,7 +76,15 @@ namespace ISDevTemplate.Manager
         [ContextMenu("GameClear")]
         public void GameClear()
         {
-            IsGameFinish = true;
+            if (_isGameJudgePrinted)
+            {
+                print("既にゲームがクリア又はゲームオーバーしているのでGameClear()を呼び出すのは無効です");
+                return;
+            }
+
+            _isGameJudgePrinted = true;
+
+            _ = SaveDataManager.Instance.IncrementSaveData();
             OnGameClear?.Invoke();
 
             _gameClearCanvas.Enable(_fadeDuration);
@@ -83,7 +98,14 @@ namespace ISDevTemplate.Manager
         [ContextMenu("GameOver")]
         public void GameOver()
         {
-            IsGameFinish = true;
+            if (_isGameJudgePrinted)
+            {
+                print("既にゲームがクリア又はゲームオーバーしているのでGameClear()を呼び出すのは無効です");
+                return;
+            }
+
+            _isGameJudgePrinted = true;
+
             OnGameOver?.Invoke();
 
             _gameOverCanvas.Enable(_fadeDuration);
@@ -95,12 +117,6 @@ namespace ISDevTemplate.Manager
 
         #region Private Methods
 
-        private void Init()
-        {
-            IsGameFinish = false;
-        }
-
-        /// <summary>
         /// デリゲートやUniRxのイベントを登録する関数
         /// </summary>
         private void SetEvents()
@@ -109,44 +125,57 @@ namespace ISDevTemplate.Manager
             SceneLoder.Instance.OnLoadEnd += Init;
 
             // セーブデータの読み込み後の処理の登録
-            SaveDataManager.Instance.OnSaveDataLoded += OnSaveDataLoded;
+            SaveDataManager.Instance.OnSaveDataLoded += LoadSavedScene;
 
             // ゲームクリア後に出るNextボタンの処理の登録
             _onGameClearButton
                 .OnClickAsObservable()
                 .TakeUntilDestroy(this)
                 .ThrottleFirst(TimeSpan.FromSeconds(_fadeDuration))
-                .Subscribe(_ => OnGameClearButton());
+                .Subscribe(_ =>
+                { 
+                    LoadNextScene();
+                    OnGameClearButton?.Invoke();
+                });
 
             // ゲームオーバー後に出るTry Againボタンの処理の登録
             _onGameOverButton
                 .OnClickAsObservable()
                 .TakeUntilDestroy(this)
                 .ThrottleFirst(TimeSpan.FromSeconds(_fadeDuration))
-                .Subscribe(_ => OnGameOverButton());
+                .Subscribe(_ =>
+                {
+                    LoadSameScene();
+                    OnGameOverButton?.Invoke();
+                });
         }
 
-        /// <summary>
-        /// セーブデータの初回読み込み後にシーンを遷移する
-        /// </summary>
-        private void OnSaveDataLoded(SaveData saveData)
+        private void Init()
         {
-            SceneLoder.Instance.LoadScene(saveData.SceneName);
+            _isGameJudgePrinted = false;
         }
 
         /// <summary>
-        /// ゲームクリア後に表示されるボタンの処理
+        /// 現在セーブされているシーンを読み込む
         /// </summary>
-        private void OnGameClearButton()
+        private void LoadSavedScene()
+        {
+            SceneLoder.Instance.LoadScene(SaveDataManager.Instance.SaveData.SceneName);
+        }
+
+        /// <summary>
+        /// 次のシーンをロードする
+        /// </summary>
+        private void LoadNextScene()
         {
             _gameClearCanvas.Disable(_fadeDuration);
             SceneLoder.Instance.LoadScene(SaveDataManager.Instance.SaveData.SceneName);
         }
 
         /// <summary>
-        /// ゲームオーバー後に表示されるボタンの処理
+        /// 同じシーンをロードする
         /// </summary>
-        private void OnGameOverButton()
+        private void LoadSameScene()
         {
             _gameOverCanvas.Disable(_fadeDuration);
             SceneLoder.Instance.LoadScene();
