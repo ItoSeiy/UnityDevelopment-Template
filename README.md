@@ -11,7 +11,7 @@
 
 | エンジン | バージョン  |
 | ---------- | ----------- |
-| Unity      | 2021.3.1f1 |
+| Unity      | [こちらを参照して下さい](ProjectSettings/ProjectVersion.txt#L1) |
 
 ## 導入済みアセット
 
