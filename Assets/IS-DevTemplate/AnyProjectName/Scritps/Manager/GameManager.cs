@@ -1,5 +1,6 @@
 using System;
 using ISDevTemplate.Data;
+using ISDevTemplate.Extensions;
 using ISDevTemplate.Scene;
 using UniRx;
 using UnityEngine;
