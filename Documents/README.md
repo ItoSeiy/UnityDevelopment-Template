@@ -18,4 +18,6 @@ Documents/
 |   └── Sound.MD
 |   
 └── ClassDiagram/(クラスをまとめている)
+    |
+    └── OutGame.drawio.svg(アウトゲームのクラス図)
 ```
