@@ -19,5 +19,5 @@ Documents/
 |   
 └── ClassDiagram/(クラスをまとめている)
     |
-    └── OutGame.drawio.svg(アウトゲームのクラス図)
+    ├── OutGame.drawio.svg(アウトゲームのクラス図)
 ```
